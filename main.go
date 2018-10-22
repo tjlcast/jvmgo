@@ -20,6 +20,7 @@ func main() {
 
 
 func startJVM(cmd *Cmd) {
+	// 设置jre(java标准) 和 cp(用户路径) 的路径
 	cp := classpath.Parse(cmd.XjreOption, cmd.cpOption)
 
 	fmt.Printf("classpath:%v class:%v args:%v\n",
