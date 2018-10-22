@@ -16,9 +16,13 @@ func newZipEntry(path string) *ZipEntry {
 	if err != nil {
 		panic(err)
 	}
-	return &ZipEntry{absPath}
+	return &ZiEntry{absPath}
 }
 
+/**
+该函数打开zip文件，
+之后zip中的文件通过 (idx, file)进行遍历访问
+ */
 func (self *ZipEntry) readClass(className string) ([]byte, Entry, error) {
 	r, err := zip.OpenReader(self.absPath)
 	if err != nil {

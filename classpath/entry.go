@@ -7,6 +7,11 @@ import (
 
 const pathListSeparator = string(os.PathListSeparator)
 
+/**
+该接口的实现主要有4种：
+	Dir 和 Zip 为具体的文件，差异点为 readClass 方法
+	Composite 和 wild 为组合对象，差异点为 newXXX 方法
+ */
 type Entry interface {
 	readClass(className string) ([]byte, Entry, error)
 	String() string
