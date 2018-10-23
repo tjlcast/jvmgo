@@ -15,6 +15,10 @@ type ClassFile struct {
 	interfaces			[]uint16
 	fields				[]*MemberInfo
 	methods				[]*MemberInfo
+	/**
+	这里的属性表的格式和 Member 中的属性表的格式相同,但是存储的类型相同，
+	classFile 中的属性表存储内部类等其他信息，而Member中存储更多的是 成员的信息
+	 */
 	attribures 			[]AttributeInfo
 }
 
