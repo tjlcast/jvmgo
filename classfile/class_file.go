@@ -4,6 +4,27 @@ import (
 	"fmt"
 )
 
+/*
+ClassFile {
+    u4             magic;
+    u2             minor_version;
+    u2             major_version;
+    u2             constant_pool_count;
+    cp_info        constant_pool[constant_pool_count-1];
+    u2             access_flags;
+    u2             this_class;
+    u2             super_class;
+    u2             interfaces_count;
+    u2             interfaces[interfaces_count];
+    u2             fields_count;
+    field_info     fields[fields_count];
+    u2             methods_count;
+    method_info    methods[methods_count];
+    u2             attributes_count;
+    attribute_info attributes[attributes_count];
+}
+*/
+
 type ClassFile struct {
 	// magic			uint32
 	minorVersion		uint16
@@ -76,7 +97,7 @@ func (self *ClassFile) readAndCheckVersion(reader *ClassReader) {
 }
 
 func (self *ClassFile) MinorVersion() uint16 {
-	// todo
+	return self.minorVersion
 }
 
 func (self *ClassFile) MajorVersion() uint16 {
@@ -84,19 +105,19 @@ func (self *ClassFile) MajorVersion() uint16 {
 }
 
 func (self *ClassFile) ConstantPool() ConstantPool {
-	// todo
+	return self.constantPool
 }
 
 func (self *ClassFile) AccessFlag() uint16 {
-	// todo
+	return self.accessFlags
 }
 
 func (self *ClassFile) Fields() []*MemberInfo {
-	// todo
+	return self.fields
 }
 
-func (self *ClassFile) Method() []*MemberInfo {
-	// todo
+func (self *ClassFile) Methods() []*MemberInfo {
+	return self.methods
 }
 
 func (self *ClassFile) ClassName() string {
@@ -107,7 +128,6 @@ func (self *ClassFile) SuperClassName() string {
 	if self.superClass > 0 {
 		return self.constantPool.getClassName(self.superClass)
 	}
-
 	return ""
 }
 

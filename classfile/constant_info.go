@@ -27,7 +27,7 @@ type ConstantInfo interface {
 func readConstantInfo(reader *ClassReader, cp ConstantPool) ConstantInfo {
 	tag := reader.readUint8()
 	c := newConstantInfo(tag, cp)
-	c.readInfo(reader)
+	c.readInfo(reader)	// cp_info 的 readInfo 方法封装了字节读取方法。
 	return c
 }
 
@@ -63,7 +63,7 @@ func newConstantInfo(tag uint8, cp ConstantPool) ConstantInfo {
 	case CONSTANT_MethodHandle:
 		return &ConstantMethodHandleInfo{}
 	case CONSTANT_InvokeDynamic:
-		return &ConstantInvokeDynamicInfo{}
+		return &ConstantInvokeDynamicInfo{cp: cp}
 	default:
 		panic("java.lang.ClassFormatError: constant pool tag!")
 	}
