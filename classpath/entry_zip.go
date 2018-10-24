@@ -16,7 +16,7 @@ func newZipEntry(path string) *ZipEntry {
 	if err != nil {
 		panic(err)
 	}
-	return &ZiEntry{absPath}
+	return &ZipEntry{absPath}
 }
 
 /**
