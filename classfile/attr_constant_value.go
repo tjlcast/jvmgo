@@ -1,5 +1,9 @@
 package classfile
 
+/**
+	定长，出现在 field_info 结构中，用于表示常量表达式的值
+ */
+
 type ConstantValueAttribute struct {
 	constantValueIndex		uint16
 }

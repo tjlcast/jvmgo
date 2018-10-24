@@ -1,6 +1,18 @@
 package classfile
 
 /**
+	Deprecated_attribute {
+		u2 attribute_name_index;
+		u4 attribute_length;
+	}
+
+	Synthetic_attribute {
+		u2 attribute_name_index;
+		u4 attribute_length;
+	}
+ */
+
+/**
 	@doc:	标记类,支持空读
  */
 type MarkerAttribute struct {

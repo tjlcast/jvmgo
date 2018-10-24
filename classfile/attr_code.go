@@ -1,19 +1,38 @@
 package classfile
 
 /**
-Code Attribute
-存在于 method_info 中的属性
+	Code_attribute {
+		u2 attribute_name_index;
+		u4 attreibute_length;
+		u2 maxx_locals;
+		u4 code_length;
+		u1 code[code_length]
+		u2 exception_table_length;
+		{
+
+		} exception_table[exception_table_length];
+		u2 attributes_count;
+		attribute_info attributes[attributes_count];
+	}
+ */
+
+/**
+	Code 是变长属性，存在于 method_info结构中
+	Code 属性中存放字节码等方法相关信息
  */
 
 type CodeAttribute struct {
 	cp			ConstantPool
-	maxStack	uint16
-	maxLocals	uint16
-	code		[]byte
+	maxStack	uint16								// 操作数栈的最大深度
+	maxLocals	uint16								// 给出局部变量表大小
+	code		[]byte								//
 	exceptionTable		[]*ExceptionTableEntry
 	attributes  		[]AttributeInfo
 }
 
+/**
+
+ */
 type ExceptionTableEntry struct {
 	startPc			uint16
 	endPc			uint16
