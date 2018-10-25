@@ -5,3 +5,12 @@
 
 
 https://github.com/zxh0/jvm.go
+
+
+jvm 解析器大致逻辑
+
+do {
+    atomically calculate pc and fetch opcode at pc
+    if (operands) fetch operands;
+    execute the action for the opcode;
+} while (there is more to do);
