@@ -39,6 +39,13 @@ func startJVM(cmd *Cmd) {
 	cf := loadClass(className, cp)
 	fmt.Println(cmd.class)
 	printClassInfo(cf)
+
+	mainMethod := getMainMethod(cf)
+	if mainMethod != nil {
+		interpret(mainMethod)
+	} else {
+		fmt.Println("Main method not found in class %s\n", cmd.class)
+	}
 }
 
 
@@ -55,6 +62,17 @@ func loadClass(className string, cp *classpath.Classpath) *classfile.ClassFile {
 
 	return cf
 }
+
+
+func getMainMethod(cf *classfile.ClassFile) *classfile.MemberInfo {
+	for _, m := range cf.Methods() {
+		if m.Name() == "main" && m.Descriptor() == "(Ljava/lang/String;)V" {
+			return m
+		}
+	}
+	return nil
+}
+
 
 func printClassInfo(cf *classfile.ClassFile) {
 	fmt.Printf("version: %v.%v\n", cf.MajorVersion(), cf.MinorVersion())

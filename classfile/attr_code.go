@@ -22,7 +22,7 @@ package classfile
  */
 
 type CodeAttribute struct {
-	cp			ConstantPool
+	cp			ConstantPool						// 本身是数组
 	maxStack	uint16								// 操作数栈的最大深度
 	maxLocals	uint16								// 给出局部变量表大小
 	code		[]byte								//
@@ -31,7 +31,7 @@ type CodeAttribute struct {
 }
 
 /**
-
+	这里是异常结构体，用于描述结构。一般存在Code Attr 中
  */
 type ExceptionTableEntry struct {
 	startPc			uint16
@@ -41,6 +41,22 @@ type ExceptionTableEntry struct {
 }
 
 //======= function ========
+
+func (self *CodeAttribute) ConstantPool() ConstantPool{
+	return self.cp
+}
+
+func (self *CodeAttribute) MaxStack() uint {
+	return uint(self.maxStack)
+}
+
+func (self *CodeAttribute) MaxLocals() uint {
+	return uint(self.maxLocals)
+}
+
+func (self *CodeAttribute) Code() []byte {
+	return self.code
+}
 
 func (self *CodeAttribute) readInfo(reader *ClassReader) {
 	self.maxStack = reader.readUint16()
